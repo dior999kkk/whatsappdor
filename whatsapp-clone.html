@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 350px;
+            height: 600px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        .chat-header {
+            background-color: #008069;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .chat-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        .chat-messages {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #f0f2f5;
+        }
+        .message {
+            max-width: 70%;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            clear: both;
+        }
+        .sent {
+            background-color: #dcf8c6;
+            float: right;
+            text-align: right;
+        }
+        .received {
+            background-color: white;
+            float: left;
+            text-align: right;
+        }
+        .message .sender {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            font-size: 0.8em;
+            color: #008069;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <img src="/api/placeholder/40/40" alt="Profile">
+            <h2>WhatsApp Clone</h2>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically added here -->
+        </div>
+    </div>
+
+    <script>
+        // Message data
+        const messages = [
+            { sender: 'דור', text: 'ואו מה זה איזה מגניב', type: 'sent' },
+            { sender: 'דורון', text: 'שלום שלום', type: 'received' },
+            { sender: 'פיונה', text: 'איפה שרק ?', type: 'received' }
+        ];
+
+        // Function to add messages to the chat
+        function addMessages() {
+            const chatMessages = document.getElementById('chatMessages');
+            
+            messages.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', message.type);
+                
+                const senderSpan = document.createElement('span');
+                senderSpan.classList.add('sender');
+                senderSpan.textContent = message.sender;
+                
+                const textSpan = document.createElement('span');
+                textSpan.textContent = message.text;
+                
+                messageElement.appendChild(senderSpan);
+                messageElement.appendChild(textSpan);
+                
+                chatMessages.appendChild(messageElement);
+            });
+
+            // Scroll to the bottom of messages
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Add messages when the page loads
+        window.onload = addMessages;
+    </script>
+</body>
+</html>
